@@ -5,7 +5,7 @@
 ### The landing page for assignment 3 should be at /
 #####################################################################
 
-from bottle import route, run, default_app, debug, static_file
+from bottle import route, run, default_app, debug, static_file, request
 
 def htmlify(title,text):
     page = """
@@ -30,10 +30,23 @@ def staticFiles(filePath):
 
 def index():
     return htmlify("My lovely website",
-                   "This is going to be an awesome website, when it is finished.")
+"""
+<form action="/show"method="POST">
+<input type="text" name="city"/>
+<input type="submit" value="test"/>
+</form>
+"""
+
+)
+
+def show():
+    bbb=request.POST
+
+    return bbb['city']
 
 route('/', 'GET', index)
 route('/static/<filePath>','GET', staticFiles)
+route('/show', 'POST', show)
 
 #####################################################################
 ### Don't alter the below code.
