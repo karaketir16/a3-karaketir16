@@ -1,5 +1,35 @@
-.left{
-display: inline-block;
-height: 300px;
-width: 20%;
+.color{
+width: 100%;
+text-align: left;
+height: 100px;
+}
+.cities{
+text-align: center;
+height: 200px;
+width: 100%;
+}
+select{
+width: 50%;
+}
+fieldset{
+display: block;
+}
+.clrdiv{
+display:inline-block;
+width: 85px;
+}
+form{
+width: 400px;
+text-align: center;
+}
+#left{
+float:left;
+}
+#right{
+float:right;
+}
+#center{
+position: relative;
+left: 75px;
+width: 80px;
 }

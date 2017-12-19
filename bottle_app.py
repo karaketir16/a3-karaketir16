@@ -28,9 +28,9 @@ def htmlify(bgcolor,title,text):
 		<link rel="stylesheet" href="static/style.css"/>
             </head>
             <body>
-	      <div>
+	      
  	           %s
-	      </div>
+	      
             </body>
         </html>
 
@@ -41,8 +41,8 @@ def staticFiles(filePath):
 
 def index():
     options="""
-<form action="/show"method="POST">
-<fieldset class="left">
+<form action="/show" method="POST">
+<fieldset class="cities">
     <legend>Select Cities you want to see that's population</legend>
 <select name="city" size="10" multiple>;
 """
@@ -56,18 +56,24 @@ def index():
         options+=opt
         a+=1
     options+="""</select><br/>
-    You can choose multiple pressing ctrl</fieldset>
-    <fieldset class="left">
+    You can choose multiple pressing ctrl</fieldset><br/>
+    <fieldset class="color">
     <legend>Select table background color</legend>
+    <div class="clrdiv" id="left">
     <input type="radio" name="bgcolor" value="white" checked/>white<br/>
     <input type="radio" name="bgcolor" value="blue"/>blue<br/>
     <input type="radio" name="bgcolor" value="green"/>green<br/>
+    </div>
+    <div class="clrdiv" id="center"> 
     <input type="radio" name="bgcolor" value="red"/>red<br/>
     <input type="radio" name="bgcolor" value="yellow"/>yellow<br/>
     <input type="radio" name="bgcolor" value="grey"/>grey<br/>
+    </div>
+    <div class="clrdiv" id="right"> 
     <input type="radio" name="bgcolor" value="pink"/>pink<br/>
     <input type="radio" name="bgcolor" value="orange"/>orange<br/>
-    <input type="radio" name="bgcolor" value="black"/>black!!!!<br/>
+    <input type="radio" name="bgcolor" value="purple"/>purple<br/>
+    </div>
     </fieldset>
     <br/>
     <input type="checkbox" name="total" value="show"/>Show total population<br/>
