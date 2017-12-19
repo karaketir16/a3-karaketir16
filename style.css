@@ -1,4 +1,5 @@
-div{
-background-color:#ffffff;
-
+.left{
+display: inline-block;
+height: 300px;
+width: 20%;
 }
