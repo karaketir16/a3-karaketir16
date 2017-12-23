@@ -12,7 +12,7 @@ contents = []
 input_file = open("a2_input.csv","r")
 for row in reader(input_file):
 	contents = contents + [row]
-
+input_file.close()
 def htmlify(bgcolor,title,text):
     page = """
         <!doctype html>
@@ -56,7 +56,9 @@ def index():
         options+=opt
         a+=1
     options+="""</select><br/>
-    You can choose multiple pressing ctrl</fieldset><br/>
+    You can choose multiple pressing ctrl<br/>If you want to see all cities check Show All<br/>
+    <input type="checkbox" name="showAll" value="true"/>Show All
+    </fieldset><br/>
     <fieldset class="color">
     <legend>Select table background color</legend>
     <div class="clrdiv" id="left">
@@ -76,7 +78,7 @@ def index():
     </div>
     </fieldset>
     <br/>
-    <input type="checkbox" name="total" value="show"/>Show total population<br/>
+    <input type="checkbox" name="total" value="show"/>Show total population of cities<br/><br/>
 <input type="submit" value="test" />
 </form>
 """
@@ -84,17 +86,53 @@ def index():
 
 def show():
     cities=request.POST.getlist('city')
+    showAll=request.POST.get('showAll')
+    total=request.POST.get('total')
+    print(showAll)
     cont="""<table>
     <tr><th>İl</th><th>2000</th><th>2001</th><th>2002</th><th>2003</th><th>2004</th><th>2005</th><th>2006</th><th>2007</th><th>2008</th><th>2009</th><th>2010</th></tr>
     %s
     </table>"""
+    totalRow=[0,0,0,0,0,0,0,0,0,0,0]
     cityRow=""
-    for city in cities:
+    if showAll==None:
+        for city in cities:
+            cityRow+="<tr>"
+            columnSay=0
+            for columns in contents[int(city)]:
+                
+                if columnSay>0:
+                    cityRow+="<td>%s</td>"%columns
+                    totalRow[columnSay-1]+= int(columns)
+                else:
+                    cityRow+="""<td class="tableCity">%s</td>"""%columns
+                      
+                columnSay+=1     
+            cityRow+"</tr>"
+    else:
+        for city in range(1,82):
+            cityRow+="<tr>"
+            columnSay=0
+            for columns in contents[city]:
+                if columnSay>0:
+                    cityRow+="<td>%s</td>"%columns
+                    totalRow[columnSay-1]+= int(columns)
+                else:
+                    cityRow+="""<td class="tableCity">%s</td>"""%columns
+                      
+                columnSay+=1
+            cityRow+"</tr>"
+
+    if total!=None:
         cityRow+="<tr>"
-        for columns in contents[int(city)]:
-            cityRow+="<td>%s</td>"%columns
-        cityRow+"</tr>"
+        cityRow+="""<td class="tableCity">Total</td>"""
+        for totals in totalRow:
+            cityRow+="<td>"
+            cityRow+=str(totals)
+            cityRow+="</td>"
+        cityRow+"</tr>"  
     cont=cont%cityRow
+
     return htmlify(request.POST.get("bgcolor"),"Populations",cont)
 
 route('/', 'GET', index)

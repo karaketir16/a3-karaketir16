@@ -5,7 +5,7 @@ height: 100px;
 }
 .cities{
 text-align: center;
-height: 200px;
+height: 240px;
 width: 100%;
 }
 select{
@@ -32,4 +32,16 @@ float:right;
 position: relative;
 left: 75px;
 width: 80px;
+}
+td{
+text-align:right;
+}
+td.tableCity{
+text-align:left;
+}
+td,th{
+padding:4px;
+}
+td,tr,th{
+border:2px solid black;
 }
