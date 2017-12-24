@@ -44,7 +44,7 @@ def index():
 <form action="/show" method="POST">
 <fieldset class="cities">
     <legend>Select Cities you want to see that's population</legend>
-<select name="city" size="10" multiple>;
+<select name="city" size="10" multiple>
 """
 
     a = 0
