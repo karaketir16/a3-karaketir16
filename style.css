@@ -42,6 +42,6 @@ text-align:left;
 td,th{
 padding:4px;
 }
-td,tr,th{
+td,tr,th,table{
 border:2px solid black;
 }

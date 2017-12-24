@@ -79,16 +79,22 @@ def index():
     </fieldset>
     <br/>
     <input type="checkbox" name="total" value="show"/>Show total population of cities<br/><br/>
-<input type="submit" value="test" />
+<input type="submit" value="Show" />
+</form>
+<br/><br/><br/><br/>
+<form action="/" method="GET">
+Change Title of page: <input type="text" name="Title" value="Title"/>
+<input type="submit" value="Change"/>
 </form>
 """
-    return htmlify("white","Populations",options)
+    if "Title" in request.GET:
+        return htmlify("white",request.GET["Title"],options)
 
+    return htmlify("white","Populations",options)
 def show():
     cities=request.POST.getlist('city')
     showAll=request.POST.get('showAll')
     total=request.POST.get('total')
-    print(showAll)
     cont="""<table>
     <tr><th>İl</th><th>2000</th><th>2001</th><th>2002</th><th>2003</th><th>2004</th><th>2005</th><th>2006</th><th>2007</th><th>2008</th><th>2009</th><th>2010</th></tr>
     %s
